@@ -176,7 +176,8 @@ int main(int argc, char**argv)
 
     vector<ListNode*> v;
     for(int i=0; i<10240; i++) {
-        v.push_back(new ListNode(random()%100));
+        // v.push_back(new ListNode(random()%100));
+        v.push_back(new ListNode(rand()%100));
     }
     printList( mergeKLists(v) );
     //mergeKLists(v);
