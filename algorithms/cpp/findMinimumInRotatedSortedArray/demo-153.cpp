@@ -26,37 +26,21 @@ using namespace std;
  * 
  *  To solve this problem, the idea is same as the search in rotated sorted array.
  */
-int findMin(vector<int> &num) {
+int findMin(vector<int> &nums) {
 
-    int low=0, high=num.size()-1;
+    int left = 0, right = nums.size() - 1, mid = 0;
 
-    while(high-low>1){
-        int mid = low + (high-low)/2;
-        // Chek the array if it is non-rotated, then just return the first element.
-        if (num[low] < num[mid] && num[mid] < num[high]){
-            return num[low];
-        }
-
-        // The array is rotated
-        // Split it into two part, the minimal value must be the rotated part
-        
-        // if the left part is rotated, warch the left part
-        if (num[low] > num [mid]){
-            high = mid;
-            continue;
-        }
-        // if the right part is rotated, search the right part.
-        if (num[mid] > num[high]){
-            low = mid;
-            continue;
+    while (left < right) {
+        mid = left + (right - left) / 2; // nums 大小为奇数，位于中间的元素；nums 大小为偶数，位于上半部分的最后一个元素
+        if (nums[mid] < nums[left]) {
+            right = mid;
+        } else if (nums[mid] > nums[right]) {
+            left = mid + 1;
+        } else {
+            --right;
         }
     }
-    // the array only has 1 element
-    if (high == low) return num[low];
-
-    // the array has 2 elements
-    return num[low] < num[high] ? num[low] : num[high];
-
+    return nums[left];
 }
 
 
